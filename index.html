@@ -21,10 +21,11 @@
         background: #fff0f5;
         border-radius: 25px;
         padding: 30px;
-        width: 320px;
+        width: 340px;
         text-align: center;
         box-shadow: 0 0 30px rgba(255, 20, 147, 0.5);
         position: relative;
+        z-index: 2;
     }
 
     h1 {
@@ -37,6 +38,7 @@
         display: flex;
         justify-content: space-around;
         margin-top: 20px;
+        position: relative;
     }
 
     button {
@@ -60,6 +62,23 @@
     #no {
         background: #ffc0cb;
         position: absolute;
+        left: 200px;
+    }
+
+    .love-widget {
+        display: none;
+        background: #ffe4ec;
+        border-radius: 25px;
+        padding: 40px;
+        font-size: 26px;
+        color: #ff1493;
+        box-shadow: 0 0 40px rgba(255, 20, 147, 0.6);
+        animation: pop 0.5s ease;
+    }
+
+    @keyframes pop {
+        from { transform: scale(0.5); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
     }
 
     .heart {
@@ -78,39 +97,46 @@
 
 <body>
 
+<!-- Музыка -->
+<audio autoplay loop>
+    <source src="https://files.catbox.moe/6r3h9k.mp3" type="audio/mpeg">
+</audio>
+
 <div class="modal" id="modal">
-    <h1>ты мне нравишься 💕<br>будешь со мной целоваться?</h1>
+    <h1>Ты мне нравишься 💕<br>Будешь со мной целоваться?</h1>
     <div class="buttons">
-        <button id="yes">да 💖</button>
-        <button id="no">нет 🙈</button>
+        <button id="yes">Да 💖</button>
+        <button id="no">Нет 🙈</button>
     </div>
+</div>
+
+<div class="love-widget" id="love">
+    Я лублу тебя 💖
 </div>
 
 <script>
     const noBtn = document.getElementById('no');
     const modal = document.getElementById('modal');
-
-    noBtn.style.left = '180px';
-    noBtn.style.top = '170px';
+    const love = document.getElementById('love');
 
     noBtn.addEventListener('mouseenter', () => {
-        const x = Math.random() * (window.innerWidth - 100);
-        const y = Math.random() * (window.innerHeight - 50);
+        const x = Math.random() * (window.innerWidth - 120);
+        const y = Math.random() * (window.innerHeight - 60);
         noBtn.style.left = x + 'px';
         noBtn.style.top = y + 'px';
     });
 
     noBtn.addEventListener('click', () => {
-        alert('соси джопу❤️');
+        alert('Соси джопу ❤️');
     });
 
     document.getElementById('yes').addEventListener('click', () => {
-        alert('лублу тебя 💘');
         modal.style.display = 'none';
+        love.style.display = 'block';
     });
 
     // сердечки
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 25; i++) {
         const heart = document.createElement('div');
         heart.className = 'heart';
         heart.innerHTML = '❤️';
