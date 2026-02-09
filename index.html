@@ -98,7 +98,7 @@
 <body>
 
 <!-- Музыка -->
-<audio autoplay loop>
+<audio id="bgMusic" loop>
     <source src="https://files.catbox.moe/6r3h9k.mp3" type="audio/mpeg">
 </audio>
 
@@ -144,6 +144,14 @@
         heart.style.animationDuration = (Math.random() * 5 + 3) + 's';
         document.body.appendChild(heart);
     }
+<script>
+    const music = document.getElementById('bgMusic');
+
+    document.addEventListener('click', () => {
+        if (music.paused) {
+            music.play();
+        }
+    }, { once: true });
 </script>
 
 </body>
