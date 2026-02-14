@@ -5,99 +5,77 @@
 <title>💘 Валентинка 💘</title>
 
 <style>
-    body {
-        margin: 0;
-        height: 100vh;
-        background: radial-gradient(circle at top, #ffb6c1, #ff69b4);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: 'Comic Sans MS', cursive;
-        cursor: url('https://cur.cursors-4u.net/others/oth-1/oth15.cur'), auto;
-        overflow: hidden;
-    }
+body {
+    margin: 0;
+    height: 100vh;
+    background: radial-gradient(circle at top, #ffb6c1, #ff69b4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Comic Sans MS', cursive;
+    overflow: hidden;
+}
 
-    .modal {
-        background: #fff0f5;
-        border-radius: 25px;
-        padding: 30px;
-        width: 340px;
-        text-align: center;
-        box-shadow: 0 0 30px rgba(255, 20, 147, 0.5);
-        position: relative;
-        z-index: 2;
-    }
+.modal {
+    background: #fff0f5;
+    border-radius: 25px;
+    padding: 30px;
+    width: 340px;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(255, 20, 147, 0.5);
+    position: relative;
+}
 
-    h1 {
-        color: #ff1493;
-        font-size: 22px;
-        margin-bottom: 25px;
-    }
+h1 {
+    color: #ff1493;
+    font-size: 22px;
+}
 
-    .buttons {
-        display: flex;
-        justify-content: space-around;
-        margin-top: 20px;
-        position: relative;
-    }
+.buttons {
+    position: relative;
+    height: 80px;
+}
 
-    button {
-        border: none;
-        padding: 12px 25px;
-        border-radius: 20px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: 0.2s;
-    }
+button {
+    border: none;
+    padding: 12px 25px;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    position: absolute;
+}
 
-    #yes {
-        background: #ff69b4;
-        color: white;
-    }
+#yes {
+    background: #ff69b4;
+    color: white;
+    left: 40px;
+}
 
-    #yes:hover {
-        transform: scale(1.1);
-    }
+#no {
+    background: #ffc0cb;
+    right: 40px;
+}
 
-    #no {
-        background: #ffc0cb;
-        position: absolute;
-        left: 200px;
-    }
+.love-widget {
+    display: none;
+    background: #ffe4ec;
+    border-radius: 25px;
+    padding: 40px;
+    font-size: 26px;
+    color: #ff1493;
+    box-shadow: 0 0 40px rgba(255, 20, 147, 0.6);
+    animation: pop 0.5s ease;
+}
 
-    .love-widget {
-        display: none;
-        background: #ffe4ec;
-        border-radius: 25px;
-        padding: 40px;
-        font-size: 26px;
-        color: #ff1493;
-        box-shadow: 0 0 40px rgba(255, 20, 147, 0.6);
-        animation: pop 0.5s ease;
-    }
-
-    @keyframes pop {
-        from { transform: scale(0.5); opacity: 0; }
-        to { transform: scale(1); opacity: 1; }
-    }
-
-    .heart {
-        position: absolute;
-        color: rgba(255, 20, 147, 0.3);
-        font-size: 24px;
-        animation: float 6s infinite linear;
-    }
-
-    @keyframes float {
-        from { transform: translateY(100vh); }
-        to { transform: translateY(-10vh); }
-    }
+@keyframes pop {
+    from { transform: scale(0.5); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
 </style>
 </head>
 
 <body>
 
-<!-- Музыка -->
 <audio id="bgMusic" loop>
     <source src="https://files.catbox.moe/6r3h9k.mp3" type="audio/mpeg">
 </audio>
@@ -115,43 +93,31 @@
 </div>
 
 <script>
-    const noBtn = document.getElementById('no');
-    const modal = document.getElementById('modal');
-    const love = document.getElementById('love');
+const music = document.getElementById('bgMusic');
+const noBtn = document.getElementById('no');
+const modal = document.getElementById('modal');
+const love = document.getElementById('love');
 
-    noBtn.addEventListener('mouseenter', () => {
-        const x = Math.random() * (window.innerWidth - 120);
-        const y = Math.random() * (window.innerHeight - 60);
-        noBtn.style.left = x + 'px';
-        noBtn.style.top = y + 'px';
-    });
-
-    noBtn.addEventListener('click', () => {
-        alert('Соси джопу ❤️');
-    });
-
-    document.getElementById('yes').addEventListener('click', () => {
-        modal.style.display = 'none';
-        love.style.display = 'block';
-    });
-
-    // сердечки
-    for (let i = 0; i < 25; i++) {
-        const heart = document.createElement('div');
-        heart.className = 'heart';
-        heart.innerHTML = '❤️';
-        heart.style.left = Math.random() * 100 + 'vw';
-        heart.style.animationDuration = (Math.random() * 5 + 3) + 's';
-        document.body.appendChild(heart);
+// музыка при первом клике
+document.addEventListener('click', () => {
+    if (music.paused) {
+        music.play();
     }
-<script>
-    const music = document.getElementById('bgMusic');
+}, { once: true });
 
-    document.addEventListener('click', () => {
-        if (music.paused) {
-            music.play();
-        }
-    }, { once: true });
+// убегающая кнопка
+noBtn.addEventListener('mouseenter', () => {
+    const x = Math.random() * (window.innerWidth - 120);
+    const y = Math.random() * (window.innerHeight - 60);
+    noBtn.style.left = x + 'px';
+    noBtn.style.top = y + 'px';
+});
+
+// нажатие Да
+document.getElementById('yes').addEventListener('click', () => {
+    modal.style.display = 'none';
+    love.style.display = 'block';
+});
 </script>
 
 </body>
